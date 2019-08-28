@@ -17,6 +17,6 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    path("api/v1/lists", include("curator.lists.urls", namespace="lists")),
+    path("api/v1/lists/", include("curator.lists.urls", namespace="lists")),
     path("admin/", admin.site.urls),
 ]

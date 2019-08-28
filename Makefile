@@ -29,7 +29,7 @@ exec:
 	$(compose) exec $(name) $(c)
 
 .PHONY: refresh
-refresh: down clean build up pg_isready migrate
+refresh: down clean build up pg_isready migrate loaddevdata
 
 .PHONY: make_migrations
 make_migrations:
@@ -58,3 +58,11 @@ endif
 .PHONY: psql
 psql:
 	$(compose) exec db psql -U postgres postgres
+
+.PHONY: loaddevdata
+loaddevdata:
+	$(compose) exec web python manage.py loaddata fixture.json
+
+.PHONY: dumpdevdata
+dumpdevdata:
+	$(compose) exec web python manage.py dumpdata --indent 2 --output dump.json
